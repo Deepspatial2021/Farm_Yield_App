@@ -5,11 +5,11 @@ import joblib
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
-from PIL import Image
+
 
 st.set_page_config(page_title='Farm Yield Prediction Model',layout="wide")
 
-model=joblib.load("Farm Yield.sav")
+model=joblib.load("Farm Yield v2.sav")
 env_df=pd.read_excel("new data.xlsx")
 env_df=env_df.dropna()
 
@@ -117,38 +117,12 @@ with left:
 
 if st.button("Calculate",use_container_width=True):
     inp_x=np.append([area,humid,k,n,p,rain,temp],crop_enc)
-    farm_yield=np.round(model.predict([inp_x])[0]*50,2)
-    farm_yield_op=np.round(farm_yield/area,2)
+    farm_yield=np.round(model.predict([inp_x])[0],2)
     season_text="Season - "+season
-    z1,z2,z3=st.columns(3)
-    with z2:
-        st.text(season_text)
-    #    string=("Crop Yield (in kg/ha)"+" - "+str(farm_yield_op)).upper()
-        string_2=("Crop Yield (in kg/ha)"+" - "+str(farm_yield)).upper()
-    #    st.text(string)
-        st.info(string_2)
-
-
-st.header("")
-image = Image.open('deepspatial.jpg')
-image_1=image.resize((180,30))
-
-cen1,cen2,cen3,cen4,cen5=st.columns(5)
-with cen3:
-    st.image(image_1)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    z1,z2=st.columns(2)
+    with z1:
+        st.subheader(season_text)
+        string_2=("Crop Yield of "+str(crop) +" = "+str(farm_yield)+"(tonnes/ha)").title()
+#        st.success('Crop Yield of  [ {} ] on your farm'.format(result))
+#        st.subheader(":blue"[string_2])
+        st.subheader(string_2)   
