@@ -126,3 +126,19 @@ if st.button("Calculate",use_container_width=True):
 #        st.success('Crop Yield of  [ {} ] on your farm'.format(result))
 #        st.subheader(":blue"[string_2])
         st.subheader(string_2)   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
