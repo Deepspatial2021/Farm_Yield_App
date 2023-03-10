@@ -117,7 +117,7 @@ with left:
 
 if st.button("Calculate",use_container_width=True):
     inp_x=np.append([area,humid,k,n,p,rain,temp],crop_enc)
-    farm_yield=np.round(model.predict([inp_x])[0]*10,2)
+    farm_yield=np.round(model.predict([inp_x])[0]*50,2)
     farm_yield_op=np.round(farm_yield/area,2)
     season_text="Season - "+season
     z1,z2,z3=st.columns(3)
